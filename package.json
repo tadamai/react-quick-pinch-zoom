@@ -1,5 +1,13 @@
 {
-  "name": "react-quick-pinch-zoom",
+  "name": "@tadamai/react-quick-pinch-zoom",
+  "homepage": "https://github.com/tadamai/react-quick-pinch-zoom",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tadamai/react-quick-pinch-zoom.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "version": "5.1.0",
   "main": "cmj/index.js",
   "module": "esm/index.js",
@@ -64,7 +72,6 @@
   "description": "A react component that providing multi-touch gestures for zooming and dragging on any DOM element.",
   "author": "David Nrb <offantik@gmail.com>",
   "license": "MIT",
-  "repository": "retyui/react-quick-pinch-zoom",
   "keywords": [
     "drag",
     "gesture",
