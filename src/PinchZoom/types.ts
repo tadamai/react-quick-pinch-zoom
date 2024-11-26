@@ -70,3 +70,6 @@ export interface RequiredProps {
 export interface Props extends DefaultProps, RequiredProps {
   //
 }
+export type Interaction = 'drag' | 'zoom';
+
+export type Point = { x: number; y: number };

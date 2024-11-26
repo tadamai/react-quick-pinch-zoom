@@ -1,8 +1,8 @@
 import React, { Component, createRef, Children, cloneElement } from 'react';
 
 import { styleRoot, styleChild, styles } from './styles.css';
-import { Interaction, Point } from '../types';
-import { isTouch } from '../utils';
+import { Interaction, Point } from './types';
+import { isTouch } from './utils';
 import { AnimateOptions, ScaleToOptions, Props, DefaultProps } from './types';
 import { getOffsetBounds } from './getOffsetBounds';
 
@@ -100,7 +100,7 @@ const calculateVelocity = (startPoint: Point, endPoint: Point): Point => ({
 
 const comparePoints = (p1: Point, p2: Point) => p1.x === p2.x && p1.y === p2.y;
 
-const noup = () => {};
+const noop = () => {};
 
 const zeroPoint = { x: 0, y: 0 };
 
@@ -118,13 +118,13 @@ class PinchZoom extends Component<Props> {
     lockDragAxis: false,
     maxZoom: 5,
     minZoom: 0.5,
-    onDoubleTap: noup,
-    onDragEnd: noup,
-    onDragStart: noup,
-    onDragUpdate: noup,
-    onZoomEnd: noup,
-    onZoomStart: noup,
-    onZoomUpdate: noup,
+    onDoubleTap: noop,
+    onDragEnd: noop,
+    onDragStart: noop,
+    onDragUpdate: noop,
+    onZoomEnd: noop,
+    onZoomStart: noop,
+    onZoomUpdate: noop,
     setOffsetsOnce: false,
     shouldInterceptWheel,
     shouldCancelHandledTouchEndEvents: false,
@@ -1015,6 +1015,20 @@ class PinchZoom extends Component<Props> {
   private _handlers: Array<[string, () => void, Document | undefined]> =
     this.props.isTouch()
       ? [
+          [
+            'mousemove',
+            this.simulate(this._handlerOnTouchMove),
+            this.props._document,
+          ],
+          [
+            'mouseup',
+            this.simulate(this._handlerOnTouchEnd),
+            this.props._document,
+          ],
+          ['mousedown', this.simulate(this._handlerOnTouchStart)],
+          ['click', this._handleClick],
+          ['wheel', this._handlerWheel],
+          // touch events
           ['touchstart', this._handlerOnTouchStart],
           ['touchend', this._handlerOnTouchEnd],
           ['touchmove', this._handlerOnTouchMove],

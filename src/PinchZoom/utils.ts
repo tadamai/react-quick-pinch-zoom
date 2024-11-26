@@ -1,4 +1,4 @@
-import type { UpdateAction } from './PinchZoom/types';
+import type { UpdateAction } from './types';
 
 const isSsr = typeof window === 'undefined';
 
