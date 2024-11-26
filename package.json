@@ -8,7 +8,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "version": "5.1.1",
+  "version": "5.1.2",
   "main": "cmj/index.js",
   "module": "esm/index.js",
   "types": "esm/index.d.ts",
