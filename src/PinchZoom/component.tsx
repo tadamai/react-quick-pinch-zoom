@@ -13,13 +13,13 @@ const { abs, min, sqrt } = Math;
 
 const isSsr = typeof window === 'undefined';
 
-const isMac = isSsr ? false : /(Mac)/i.test(navigator.platform);
+// const isMac = isSsr ? false : /(Mac)/i.test(navigator.platform);
 
 const isDragInteraction = (i: Interaction | null): boolean => i === 'drag';
 
 const isZoomInteraction = (i: Interaction | null): boolean => i === 'zoom';
 
-const isZoomGesture = (wheelEvent: WheelEvent) => isMac && wheelEvent.ctrlKey;
+// const isZoomGesture = (wheelEvent: WheelEvent) => isMac && wheelEvent.ctrlKey;
 
 const cancelEvent = (event: any): void => {
   event.stopPropagation();
@@ -981,13 +981,18 @@ class PinchZoom extends Component<Props> {
 
     cancelEvent(wheelEvent);
 
-    const { pageX, pageY, deltaY, deltaMode } = wheelEvent;
+    const {
+      pageX,
+      pageY,
+      deltaY,
+      // deltaMode
+    } = wheelEvent;
 
-    let scaleDelta = 1;
+    // let scaleDelta = 1;
 
-    if (isZoomGesture(wheelEvent) || deltaMode === 1) {
-      scaleDelta = 15;
-    }
+    // if (isZoomGesture(wheelEvent) || deltaMode === 1) {
+    //   scaleDelta = 15;
+    // }
 
     const likeTouchEvent: TouchEvent = {
       touches: [
