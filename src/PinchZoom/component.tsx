@@ -9,7 +9,11 @@ import { getOffsetBounds } from './getOffsetBounds';
 const classnames = (base: string, other?: string): string =>
   other ? `${base} ${other}` : base;
 
-const { abs, min, sqrt } = Math;
+const {
+  abs,
+  //  min,
+  sqrt,
+} = Math;
 
 const isSsr = typeof window === 'undefined';
 
@@ -701,18 +705,18 @@ class PinchZoom extends Component<Props> {
     return getElementSize(div?.firstElementChild as HTMLElement | null);
   }
 
-  private _updateInitialZoomFactor() {
-    const rect = this._getContainerRect();
-    const size = this._getChildSize();
-    const xZoomFactor = rect.width / size.width;
-    const yZoomFactor = rect.height / size.height;
+  // private _updateInitialZoomFactor() {
+  //   const rect = this._getContainerRect();
+  //   const size = this._getChildSize();
+  //   const xZoomFactor = rect.width / size.width;
+  //   const yZoomFactor = rect.height / size.height;
 
-    this._initialZoomFactor = min(xZoomFactor, yZoomFactor);
-  }
+  //   this._initialZoomFactor = min(xZoomFactor, yZoomFactor);
+  // }
 
   private _onResize = () => {
     if (this._containerRef?.current) {
-      this._updateInitialZoomFactor();
+      // this._updateInitialZoomFactor();
       this._setupOffsets();
       this._update();
     }
