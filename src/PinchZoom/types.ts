@@ -58,6 +58,7 @@ export interface DefaultProps {
   doubleTapZoomOutOnMaxScale: boolean;
   doubleTapToggleZoom: boolean;
   isTouch: () => boolean;
+  isMouse: () => boolean;
 
   _document: Document;
 }

@@ -115,6 +115,7 @@ class PinchZoom extends Component<Props> {
     inertiaFriction: 0.96,
     horizontalPadding: 0,
     isTouch,
+    isMouse: () => true,
     lockDragAxis: false,
     maxZoom: 5,
     minZoom: 0.5,
@@ -996,10 +997,12 @@ class PinchZoom extends Component<Props> {
     };
     const center = this._getOffsetByFirstTouch(likeTouchEvent);
     const dScale = deltaY * scaleDelta;
+    const delta = deltaY > 0 ? 1 : -1;
 
     this._stopAnimation();
+    // this._scaleTo(this._zoomFactor - dScale / this.props.wheelScaleFactor, center);
     this._scaleTo(
-      this._zoomFactor - dScale / this.props.wheelScaleFactor,
+      this._zoomFactor - delta * this.props.wheelScaleFactor,
       center,
     );
     this._update();
@@ -1012,8 +1015,15 @@ class PinchZoom extends Component<Props> {
   };
 
   // @ts-ignore
-  private _handlers: Array<[string, () => void, Document | undefined]> =
-    this.props.isTouch()
+  private _handlers: [string, () => void, Document | undefined][] = [
+    ...(this.props.isTouch()
+      ? [
+          ['touchstart', this._handlerOnTouchStart],
+          ['touchend', this._handlerOnTouchEnd],
+          ['touchmove', this._handlerOnTouchMove],
+        ]
+      : []),
+    ...(this.props.isMouse()
       ? [
           [
             'mousemove',
@@ -1028,26 +1038,9 @@ class PinchZoom extends Component<Props> {
           ['mousedown', this.simulate(this._handlerOnTouchStart)],
           ['click', this._handleClick],
           ['wheel', this._handlerWheel],
-          // touch events
-          ['touchstart', this._handlerOnTouchStart],
-          ['touchend', this._handlerOnTouchEnd],
-          ['touchmove', this._handlerOnTouchMove],
         ]
-      : [
-          [
-            'mousemove',
-            this.simulate(this._handlerOnTouchMove),
-            this.props._document,
-          ],
-          [
-            'mouseup',
-            this.simulate(this._handlerOnTouchEnd),
-            this.props._document,
-          ],
-          ['mousedown', this.simulate(this._handlerOnTouchStart)],
-          ['click', this._handleClick],
-          ['wheel', this._handlerWheel],
-        ];
+      : []),
+  ];
 
   componentDidMount() {
     this._bindEvents();
