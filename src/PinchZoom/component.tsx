@@ -996,7 +996,7 @@ class PinchZoom extends Component<Props> {
       ],
     };
     const center = this._getOffsetByFirstTouch(likeTouchEvent);
-    const dScale = deltaY * scaleDelta;
+    // const dScale = deltaY * scaleDelta;
     const delta = deltaY > 0 ? 1 : -1;
 
     this._stopAnimation();
