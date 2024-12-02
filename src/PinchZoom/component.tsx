@@ -456,6 +456,7 @@ class PinchZoom extends Component<Props> {
 
     this._zoomFactor = 1;
     this._offset = { x: 0, y: 0 };
+    this._isOffsetsSet = true;
 
     this._scaleTo(scale, { x, y });
     this._stopAnimation();
