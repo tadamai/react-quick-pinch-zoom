@@ -119,7 +119,6 @@ class PinchZoom extends Component<Props> {
     inertiaFriction: 0.96,
     horizontalPadding: 0,
     isTouch,
-    isMouse: () => true,
     lockDragAxis: false,
     maxZoom: 5,
     minZoom: 0.5,
@@ -1032,9 +1031,7 @@ class PinchZoom extends Component<Props> {
           ['touchend', this._handlerOnTouchEnd],
           ['touchmove', this._handlerOnTouchMove],
         ]
-      : []),
-    ...(this.props.isMouse()
-      ? [
+      : [
           [
             'mousemove',
             this.simulate(this._handlerOnTouchMove),
@@ -1048,8 +1045,7 @@ class PinchZoom extends Component<Props> {
           ['mousedown', this.simulate(this._handlerOnTouchStart)],
           ['click', this._handleClick],
           ['wheel', this._handlerWheel],
-        ]
-      : []),
+        ]),
   ];
 
   componentDidMount() {
